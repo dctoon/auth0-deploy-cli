@@ -121,6 +121,8 @@ repository =>
   resource-servers
     resource server 1.json
     some other resource server.json
+  connections
+    connection-name.json
   database-connections
     my-connection-name
       get_user.js
@@ -158,6 +160,11 @@ To specify client grants, you must specify the following in the metadata file.  
 The name of the file is the name of the resource server that is created or updated.
 
 In the .json file you can put the same json you would put when using the Management API for creating resource servers.  It will only try to keep the fields specified inline with what is configured already.  If a resource server doesn't exist yet, it will create it.
+
+##### Connections
+The name of the file is the name of the connection that is created or updated.
+
+In the .json file you can put the same json you would put when using the [Management API](https://auth0.com/docs/api/management/v2#!/Connections/patch_connections_by_id) for creating connections. **Note**: if you use the options parameter, the whole options object will be overridden, so ensure that all parameters are present. If a connection doesn't exist yet, it will create it.
 
 ##### Database Connections
 See Database Connection configuration [here](https://auth0.com/docs/extensions/github-deploy#deploy-database-connection-scripts)
