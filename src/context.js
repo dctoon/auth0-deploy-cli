@@ -353,7 +353,8 @@ const getChanges = (filePath, mappings) => {
       pages: getPages(path.join(fullPath, constants.PAGES_DIRECTORY)),
       databases: getDatabaseScripts((path.join(fullPath, constants.DATABASE_CONNECTIONS_DIRECTORY))),
       clients: getConfigurableConfigs((path.join(fullPath, constants.CLIENTS_DIRECTORY)), 'client'),
-      resourceServers: getConfigurableConfigs((path.join(fullPath, constants.RESOURCE_SERVERS_DIRECTORY)), 'resource server')
+      resourceServers: getConfigurableConfigs((path.join(fullPath, constants.RESOURCE_SERVERS_DIRECTORY)), 'resource server'),
+      connections: getConfigurableConfigs((path.join(fullPath, constants.CONNECTIONS_DIRECTORY)), 'connection')
     };
 
     return Promise.props(promises)
@@ -362,7 +363,8 @@ const getChanges = (filePath, mappings) => {
         databases: unifyDatabases(result.databases, mappings),
         pages: unifyScripts(result.pages, mappings),
         clients: unifyScripts(result.clients, mappings),
-        resourceServers: unifyScripts(result.resourceServers, mappings)
+        resourceServers: unifyScripts(result.resourceServers, mappings),
+        connections: unifyScripts(result.connections, mappings)
       }));
   } else if (lstat.isFile()) {
     /* If it is a file, parse it */
@@ -392,6 +394,7 @@ export default class {
           me.databases = data.databases || [];
           me.clients = data.clients || {};
           me.resourceServers = data.resourceServers || {};
+          me.connections = data.connections || {};
         });
   }
 }

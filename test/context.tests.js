@@ -125,7 +125,7 @@ describe('#context', () => {
     });
   });
 
-  describe('#context connections', () => {
+  describe('#context database connections', () => {
     const createDbDir = (databaseDir, data) => {
       const dbDir = path.resolve(databaseDir, data.name);
       cleanThenMkdir(dbDir);
@@ -399,6 +399,12 @@ describe('#context', () => {
             metadataFile: '{ "some1MetaKey": "som1eMetaVal" }',
             name: 'resourceName'
           }
+        },
+        connections: {
+          connectionName: {
+            configFile: '{ "some1Key": "some1Val" }',
+            name: 'connectionName'
+          }
         }
       };
 
@@ -412,6 +418,7 @@ describe('#context', () => {
             target.clients.someClient2.configFile = '{ "someKey": "someVal" }';
             expect(context.clients).to.deep.equal(target.clients);
             expect(context.resourceServers).to.deep.equal(target['resource-servers']);
+            expect(context.connections).to.deep.equal(target.connections);
           });
         });
     });
